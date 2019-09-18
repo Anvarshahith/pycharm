@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: crmdb-rc
+  labels:
+    name: crmdb-template
+    app: crmdb-template-cust1
+spec:
+  template:
+    metadata:
+      name: crmdb-pod
+      labels:
+        name: mycrmdb
+        app: mycrmdb-cust1
+    spec:
+      containers:
+        - name: nginx-crm
+          image: nginx
+          ports:
+            - containerPort: 80
+  replicas: 3
+  selector:
+    matchLabels:
+      name: mycrmdb
+      app: mycrmdb-cust1
