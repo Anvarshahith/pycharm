@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: nginx-app-dp
+
+spec:
+  template:
+    metadata:
+      name: crm-nginx-pod
+      labels:
+        app: crmapp-pod
+    spec:
+      containers:
+       - name: crmapp-container
+         image: nginx:1.9.1
+         ports:
+           - containerPort: 80
+  replicas: 9
+  selector:
+    matchLabels:
+       app: crmapp-pod
